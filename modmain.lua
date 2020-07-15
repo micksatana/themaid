@@ -1,6 +1,7 @@
 PrefabFiles = {
 	"themaid",
-	"themaid_none",
+    "themaid_none",
+    "themaidknife",
 }
 
 Assets = {
@@ -39,11 +40,15 @@ AddMinimapAtlas("images/map_icons/themaid.xml")
 
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
+local TUNING = GLOBAL.TUNING
+
+TUNING.THEMAID = {}
+TUNING.THEMAID.REVENGEKEY = GetModConfigData("revengekey") or 122
 
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.themaid = "The Maid"
 STRINGS.CHARACTER_NAMES.themaid = "Joy"
-STRINGS.CHARACTER_DESCRIPTIONS.themaid = "*Faster in killer mode\n*Sanity drained in killer mode\n*Do not afraid of darkness"
+STRINGS.CHARACTER_DESCRIPTIONS.themaid = "*Quick, quick, Master is calling\n*Like to do OT\n*Servant mindset\n*Has a tough life\n*Holding a grudge\n*Craftable items; Joy\'s pill and knife"
 STRINGS.CHARACTER_QUOTES.themaid = "\"How Ploy died?\""
 STRINGS.CHARACTER_SURVIVABILITY.themaid = "Slim"
 
@@ -65,6 +70,9 @@ local skin_modes = {
         offset = { 0, -25 } 
     },
 }
+
+STRINGS.NAMES.THEMAIDKNIFE = "Joy's Knife"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.THEMAIDKNIFE = "Not for preparing food, of course"
 
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("themaid", "FEMALE", skin_modes)
