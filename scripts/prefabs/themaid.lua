@@ -4,22 +4,10 @@ local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
 	Asset( "ANIM", "anim/themaid_revenge.zip" ),
 }
-
--- Your character's stats
-TUNING.THEMAID_HEALTH = 250
-TUNING.THEMAID_HUNGER = 150
-TUNING.THEMAID_SANITY = 100
-
--- Custom starting inventory
-TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.THEMAID = {
-	"themaidknife",
+local startingInventory = {
+	default = TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.THEMAID
 }
-
-local start_inv = {}
-for k, v in pairs(TUNING.GAMEMODE_STARTING_ITEMS) do
-    start_inv[string.lower(k)] = v.THEMAID
-end
-local prefabs = FlattenTree(start_inv, true)
+local prefabs = {}
 
 -- Perk: Like to do OT
 local function ApplyLikeToDoOT(inst)
@@ -157,18 +145,21 @@ local function Revenge(inst)
 end
 
 -- This initializes for both the server and client. Tags can be added here.
-local common_postinit = function(inst) 
+local function CommonPostInit(inst) 
 	-- Minimap icon
 	inst.MiniMapEntity:SetIcon("themaid.tex")
-	
+
 	inst:AddComponent("keyhandler")
-    inst.components.keyhandler:AddActionListener("themaid", TUNING.THEMAID.REVENGEKEY, "REVENGE")
+	inst.components.keyhandler:AddActionListener("themaid", TUNING.THEMAID.REVENGEKEY, "REVENGE")
+
+	inst:AddTag("woodcutter")
+	inst:AddTag("themaidbuilder")
 end
 
 -- This initializes for the server only. Components are added here.
-local master_postinit = function(inst)
+local function MasterPostInit(inst)
 	-- Set starting inventory
-    inst.starting_inventory = start_inv[TheNet:GetServerGameMode()] or start_inv.default
+    inst.starting_inventory = startingInventory[TheNet:GetServerGameMode()] or startingInventory.default
 
 	-- choose which sounds this character will play
 	inst.soundsname = "wendy"
@@ -189,4 +180,4 @@ end
 
 AddModRPCHandler("themaid", "REVENGE", Revenge)
 
-return MakePlayerCharacter("themaid", prefabs, assets, common_postinit, master_postinit, prefabs)
+return MakePlayerCharacter("themaid", prefabs, assets, CommonPostInit, MasterPostInit, startingInventory)

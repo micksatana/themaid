@@ -1,25 +1,18 @@
 local assets =
 {
-	-- Animation files used for the item.
 	Asset("ANIM", "anim/themaidknife.zip"),
-
-	-- Inventory image and atlas file used for the item.
-    Asset("ATLAS", "images/inventoryimages/themaidknife.xml"),
-    Asset("IMAGE", "images/inventoryimages/themaidknife.tex"),
+    Asset("ANIM", "anim/swap_themaidknife.zip"),
 }
 prefabs = {
-    "themaidknife",
 }
 
-local function onequip(inst, owner) 
-    owner.AnimState:OverrideSymbol("swap_object", -- Symbol to override.
-    	"themaidknife", -- Animation bank we will use to overwrite the symbol.
-    	"themaidknife") -- Symbol to overwrite it with.
+local function OnEquip(inst, owner) 
+    owner.AnimState:OverrideSymbol("swap_object", "swap_themaidknife", "swap_themaidknife")
     owner.AnimState:Show("ARM_carry") 
     owner.AnimState:Hide("ARM_normal") 
 end
 
-local function onunequip(inst, owner) 
+local function OnUnequip(inst, owner) 
     owner.AnimState:Hide("ARM_carry") 
     owner.AnimState:Show("ARM_normal") 
 end
@@ -29,38 +22,48 @@ local function init()
 
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("themaidknife")
     inst.AnimState:SetBuild("themaidknife")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddTag("sharp")
+	inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon( "themaidknife.tex" )
 
+    MakeInventoryFloatable(inst, "med", 0.2, 0.7)
+    MakeInventoryPhysics(inst)
+
+    
+    inst.entity:SetPristine()
+    
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst.entity:SetPristine()
+    inst:AddComponent("inspectable")
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(50)
+    inst.components.weapon:SetDamage(66)
 
-    inst:AddComponent("inspectable")
-    
+    inst:AddComponent("tool")
+    inst.components.tool:SetAction(ACTIONS.CHOP, 1.5)
+    inst.components.tool:SetAction(ACTIONS.MINE, 1.5)
+    inst.components.tool:SetAction(ACTIONS.DIG, 1.5)
+
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/themaidknife.xml"
-    inst.components.inventoryitem.imagename = "themaidknife"
-    
+
     inst:AddComponent("equippable")
-    inst.components.equippable:SetOnEquip(onequip)
-    inst.components.equippable:SetOnUnequip(onunequip)
+    inst.components.equippable:SetOnEquip(OnEquip)
+    inst.components.equippable:SetOnUnequip(OnUnequip)
 
     MakeHauntableLaunch(inst)
 
     return inst
 end
+
+STRINGS.NAMES.THEMAIDKNIFE = "Joy's Knife"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.THEMAIDKNIFE = "Extremely deadly sharp! It also can be used as universal tool."
+
 return  Prefab("common/inventory/themaidknife", init, assets, prefabs)

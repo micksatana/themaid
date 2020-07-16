@@ -13,16 +13,15 @@ She is a character from The Maid, Thai horror movie on Netflix, directed by Lee 
  	* Not afraid of darkness
 	* Too concentrate, 20% harder to get hungry
  * Servant mindset: Get 20% more damage and deal 20% less damage
- * Craftable items; Joy's pill and knife [Work in Progress]
-	* Joy's pill: Restore 30 Sanity points. Craftable using a blue mushroom and a green mushroom
-	* Joy's knife: 50 damage
+ * Joy's knife: 66 damage, can be used as universal tool
+ * Joy's pill: Restore 40 Sanity points. Craftable using a blue mushroom and a green mushroom [Work in Progress]
 
 ### Revenge 
 
 Transform to Revenge form using `z` key. After Joy transformed, the following perks applies
 
  * Holding a grudge:
-    * Move and attack 50% faster
+    * Move and attack 75% faster
 	* Deal 50% more damage
 	* Remove Servant mindset
 	* Drain Sanity 0.5 point per second
