@@ -89,6 +89,7 @@ STRINGS.SKIN_NAMES.themaid_none = "Joy"
 TUNING.THEMAID_HEALTH = 250
 TUNING.THEMAID_HUNGER = 150
 TUNING.THEMAID_SANITY = 100
+TUNING.THEMAID_HUNGER_RATE = TUNING.WILSON_HUNGER_RATE * 0.8
 
 local theMaidTab = AddRecipeTab("The Maid Tab", 666, "images/themaidtab/themaidtab.xml", "themaidtab.tex", "themaidbuilder")
 

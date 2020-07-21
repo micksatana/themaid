@@ -168,8 +168,7 @@ local function MasterPostInit(inst)
 	inst.components.health:SetMaxHealth(TUNING.THEMAID_HEALTH)
 	inst.components.hunger:SetMax(TUNING.THEMAID_HUNGER)
 	inst.components.sanity:SetMax(TUNING.THEMAID_SANITY)
-	inst.components.hunger.hungerrate = 0.5
-	inst.components.hunger.burnrate = 0.5
+	inst.components.hunger:SetRate(TUNING.THEMAID_HUNGER_RATE)
 
 	-- A bit bigger than extended character
 	inst.Transform:SetScale(1.2, 1.2, 1.2)
