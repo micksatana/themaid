@@ -1,8 +1,8 @@
 -- This information tells other players more about the mod
 name = "The Maid"
-description = "Joy, a character from The Maid, Thai horror movie on Netflix"
+description = "Joy, The Maid. She is a character from The Maid, Thai horror movie on Netflix, directed by Lee Thongkham. If you like this mod, please support the movie by watching it on Netflix."
 author = "Satana Charuwichitratana"
-version = "1.0.2" -- This is the version of the template. Change it to your own number.
+version = "1.0.5" -- This is the version of the template. Change it to your own number.
 
 -- This is the URL name of the mod's thread on the forum; the part after the ? and before the first & in the url
 forumthread = ""

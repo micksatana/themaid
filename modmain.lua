@@ -91,15 +91,21 @@ TUNING.THEMAID_HUNGER = 150
 TUNING.THEMAID_SANITY = 100
 TUNING.THEMAID_HUNGER_RATE = TUNING.WILSON_HUNGER_RATE * 0.8
 
-local theMaidTab = AddRecipeTab("The Maid Tab", 666, "images/themaidtab/themaidtab.xml", "themaidtab.tex", "themaidbuilder")
-
 local theMaidPill = Ingredient("themaidpill", 1)
 theMaidPill.atlas = "images/inventoryimages/themaidpill.xml"
 STRINGS.RECIPE_DESC.THEMAIDPILL = "Greatly boost sanity"
 
-local theMaidPillRecipe = AddRecipe("themaidpill", {
-    Ingredient("blue_cap", 1), Ingredient("green_cap", 1)
-}, theMaidTab, TECH.NONE, nil, nil, nil, nil, "themaidbuilder", "images/inventoryimages/themaidpill.xml")
+local theMaidPillRecipe = AddRecipe2(
+    "themaidpill", 
+    {
+        Ingredient("blue_cap", 1), 
+        Ingredient("green_cap", 1)}, 
+        TECH.NONE,
+    {
+        builder_tag = "themaidbuilder",
+        atlas = theMaidPill.atlas
+    }
+)
 
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("themaid", "FEMALE")
